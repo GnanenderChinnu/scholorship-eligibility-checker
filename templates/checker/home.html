@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}SchemeSetu{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Scholarship eligibility checker</p>
+    <h1>Find government scholarships that fit your profile.</h1>
+    <p class="lead">Enter your education, income, category, state, marks, documents, and special conditions to see central and state schemes you may qualify for.</p>
+    <div class="actions">
+      {% if user.is_authenticated %}
+        <a class="button" href="{% url 'profile' %}">Check my eligibility</a>
+      {% else %}
+        <a class="button" href="{% url 'register' %}">Create account</a>
+        <a class="button secondary" href="{% url 'scheme_list' %}">Browse {{ total_schemes }} schemes</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="stats-strip">
+  <div><strong>{{ total_schemes }}</strong><span>Total schemes</span></div>
+  <div><strong>{{ central_count }}</strong><span>Central schemes</span></div>
+  <div><strong>{{ state_count }}</strong><span>State schemes</span></div>
+</section>
+
+<section class="summary-grid">
+  <div>
+    <h2>Structured rules</h2>
+    <p>Scheme eligibility is stored as fields for state, category, gender, education, income, marks, disability, BPL, and bank account requirements.</p>
+  </div>
+  <div>
+    <h2>Clear results</h2>
+    <p>Each result explains what matched and which requirements are missing, so the student can act on the right next step.</p>
+  </div>
+  <div>
+    <h2>Admin managed</h2>
+    <p>New schemes and rule updates can be managed from Django Admin without changing code.</p>
+  </div>
+</section>
+{% endblock %}

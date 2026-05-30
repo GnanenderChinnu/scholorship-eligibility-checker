@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Dashboard</h1>
+  <p>Welcome, {{ user.username }}.</p>
+</section>
+
+<section class="dashboard-grid">
+  <div class="metric">
+    <strong>{{ total_schemes }}</strong>
+    <span>Available schemes</span>
+  </div>
+  <div class="metric">
+    <strong>{{ matched_count }}</strong>
+    <span>Eligible matches</span>
+  </div>
+  <div class="metric">
+    <strong>{{ almost_count }}</strong>
+    <span>Almost eligible</span>
+  </div>
+</section>
+
+<section class="panel">
+  {% if profile_exists %}
+    <h2>{{ matched_count }} eligible scheme{{ matched_count|pluralize }} found</h2>
+    <p>Your profile is complete. Review your matches or update details if anything changed.</p>
+    <div class="actions">
+      <a class="button" href="{% url 'results' %}">View results</a>
+      <a class="button secondary" href="{% url 'profile' %}">Edit profile</a>
+    </div>
+  {% else %}
+    <h2>Complete your profile</h2>
+    <p>Add your student details to calculate scholarship eligibility.</p>
+    <a class="button" href="{% url 'profile' %}">Add profile</a>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ scheme.name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="tag">{{ scheme.get_scope_display }}</p>
+  <h1>{{ scheme.name }}</h1>
+  <p>{{ scheme.provider }}</p>
+</section>
+
+<section class="detail-layout">
+  <div class="panel">
+    <h2>About</h2>
+    <p>{{ scheme.description }}</p>
+    <h2>Benefit</h2>
+    <p>{{ scheme.benefit }}</p>
+    {% if scheme.official_url %}
+      <a class="button" href="{{ scheme.official_url }}" target="_blank" rel="noreferrer">Official portal</a>
+    {% endif %}
+  </div>
+  <div class="panel">
+    <h2>Rules</h2>
+    <dl class="rule-list">
+      <dt>Income limit</dt><dd>{% if scheme.max_annual_income %}Up to Rs. {{ scheme.max_annual_income }}{% else %}No limit stored{% endif %}</dd>
+      <dt>Minimum marks</dt><dd>{% if scheme.min_marks_percent %}{{ scheme.min_marks_percent }}%{% else %}No minimum stored{% endif %}</dd>
+      <dt>Age range</dt><dd>{% if scheme.min_age or scheme.max_age %}{{ scheme.min_age|default:"Any" }} to {{ scheme.max_age|default:"Any" }} years{% else %}No age rule stored{% endif %}</dd>
+      <dt>Academic year</dt><dd>{{ scheme.academic_year }}</dd>
+      <dt>Documents</dt><dd>{{ scheme.documents_required|default:"Not specified" }}</dd>
+      <dt>How to apply</dt><dd>{{ scheme.application_steps|default:"Not specified" }}</dd>
+      <dt>Deadline</dt><dd>{{ scheme.deadline_note|default:"Check official portal" }}</dd>
+      <dt>Source</dt><dd>{% if scheme.source_url %}<a href="{{ scheme.source_url }}" target="_blank" rel="noreferrer">Verification source</a>{% else %}Not stored{% endif %}</dd>
+      <dt>Verified</dt><dd>{{ scheme.last_verified_on|default:"Not recorded" }}</dd>
+    </dl>
+  </div>
+</section>
+{% endblock %}

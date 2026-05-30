@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Student Profile{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Student profile</h1>
+  <p>These details are used only to match scheme rules.</p>
+</section>
+
+<form method="post" class="form-panel">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="form-section-title">
+    <h2>Personal, academic, and document details</h2>
+    <p>Use realistic details to get useful eligibility results.</p>
+  </div>
+  <div class="form-grid">
+    {% for field in form %}
+      <label class="{% if field.field.widget.input_type == 'checkbox' %}checkbox-row{% endif %}">
+        <span>{{ field.label }}</span>
+        {{ field }}
+        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        {{ field.errors }}
+      </label>
+    {% endfor %}
+  </div>
+  <button class="button" type="submit">Save and check eligibility</button>
+</form>
+{% endblock %}

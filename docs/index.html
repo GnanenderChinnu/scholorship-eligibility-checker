@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SchemeSetu - Scholarship Eligibility Checker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home">SchemeSetu</a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#checker">Check Eligibility</a>
+      <a href="#schemes">Schemes</a>
+      <a href="#report">Report</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div>
+        <p class="eyebrow">Scholarship eligibility checker</p>
+        <h1>Find scholarships that match a student profile.</h1>
+        <p class="lead">A complete static demo of a government-style scholarship checker. It runs fully in the browser, stores demo profile data locally, and can be hosted on GitHub Pages.</p>
+        <div class="actions">
+          <a class="button" href="#checker">Start checking</a>
+          <a class="button secondary" href="#schemes">Browse schemes</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong id="schemeCount">0</strong><span>Total schemes</span></div>
+      <div><strong id="centralCount">0</strong><span>Central</span></div>
+      <div><strong id="stateCount">0</strong><span>State</span></div>
+      <div><strong>100%</strong><span>Browser based</span></div>
+    </section>
+
+    <section id="checker" class="page-section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Student profile</p>
+          <h2>Check eligibility</h2>
+        </div>
+        <button class="button secondary" id="loadDemo">Load demo profile</button>
+      </div>
+
+      <form id="profileForm" class="form-card">
+        <div class="form-grid">
+          <label><span>Full name</span><input name="fullName" required></label>
+          <label><span>Date of birth</span><input type="date" name="dob" required></label>
+          <label><span>Gender</span><select name="gender" required></select></label>
+          <label><span>Domicile state</span><select name="state" required></select></label>
+          <label><span>Category</span><select name="category" required></select></label>
+          <label><span>Annual family income</span><input type="number" name="income" min="0" required></label>
+          <label><span>Education level</span><select name="education" required></select></label>
+          <label><span>Course stream</span><select name="stream" required></select></label>
+          <label><span>Marks percentage</span><input type="number" name="marks" min="0" max="100" step="0.01" required></label>
+          <label><span>Residence</span><select name="residence" required></select></label>
+        </div>
+
+        <div class="checks">
+          <label><input type="checkbox" name="bank"> Bank account available</label>
+          <label><input type="checkbox" name="aadhaarBank"> Aadhaar-linked bank</label>
+          <label><input type="checkbox" name="incomeCertificate"> Income certificate</label>
+          <label><input type="checkbox" name="casteCertificate"> Caste/category certificate</label>
+          <label><input type="checkbox" name="disability"> Disability</label>
+          <label><input type="checkbox" name="disabilityCertificate"> Disability certificate</label>
+          <label><input type="checkbox" name="bpl"> BPL</label>
+          <label><input type="checkbox" name="previousPassed"> Previous year passed</label>
+        </div>
+
+        <button class="button" type="submit">Calculate eligibility</button>
+      </form>
+    </section>
+
+    <section id="schemes" class="page-section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Scheme database</p>
+          <h2>Browse schemes</h2>
+        </div>
+      </div>
+
+      <form class="filter-bar" id="schemeFilters">
+        <label><span>Search</span><input type="search" name="q" placeholder="Scheme or provider"></label>
+        <label><span>Scope</span><select name="scope"><option value="">All</option><option value="central">Central</option><option value="state">State</option></select></label>
+        <label><span>Category</span><select name="category"></select></label>
+        <label><span>Education</span><select name="education"></select></label>
+        <button class="button" type="submit">Filter</button>
+        <button class="button secondary" type="button" id="resetFilters">Reset</button>
+      </form>
+
+      <div id="schemeList" class="card-list"></div>
+    </section>
+
+    <section id="report" class="page-section">
+      <div class="section-head print-head">
+        <div>
+          <p class="eyebrow">Eligibility report</p>
+          <h2>Results</h2>
+        </div>
+        <button class="button secondary no-print" id="printReport">Print / download</button>
+      </div>
+      <div id="reportSummary" class="report-summary"></div>
+      <div id="resultsList" class="card-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Demo project for portfolio use. Results are rule-based guidance and must be verified on official portals.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

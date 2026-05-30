@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Privacy{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Privacy</h1>
+  <p>How student information is handled in this eligibility checker.</p>
+</section>
+
+<section class="panel legal-copy">
+  <h2>Information collected</h2>
+  <p>The app stores account details and profile information entered by the student, such as state, category, education level, income range, marks, certificate readiness, and scholarship-related conditions.</p>
+
+  <h2>Purpose</h2>
+  <p>This information is used to calculate likely scholarship eligibility and show missing requirements. It should not be sold or used for unrelated marketing.</p>
+
+  <h2>Sensitive documents</h2>
+  <p>The current version records whether a student has documents. It does not upload or store certificate files, Aadhaar numbers, bank account numbers, or original documents.</p>
+
+  <h2>Admin access</h2>
+  <p>Site administrators can manage scheme data and may access student profiles through Django Admin. Production deployments should restrict admin accounts to trusted operators only.</p>
+</section>
+{% endblock %}

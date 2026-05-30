@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Schemes{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Scholarship schemes</h1>
+  <p>Browse central and state scholarship data currently available in the database.</p>
+</section>
+
+<form class="filter-bar" method="get">
+  <label>
+    <span>Search</span>
+    <input type="search" name="q" value="{{ filters.q }}" placeholder="Scheme, provider, keyword">
+  </label>
+  <label>
+    <span>Scope</span>
+    <select name="scope">
+      <option value="">All</option>
+      <option value="central" {% if filters.scope == "central" %}selected{% endif %}>Central</option>
+      <option value="state" {% if filters.scope == "state" %}selected{% endif %}>State</option>
+    </select>
+  </label>
+  <label>
+    <span>State</span>
+    <select name="state">
+      <option value="">Any state</option>
+      {% for value, label in state_choices %}
+        <option value="{{ value }}" {% if filters.state == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    <span>Category</span>
+    <select name="category">
+      <option value="">Any category</option>
+      {% for value, label in category_choices %}
+        <option value="{{ value }}" {% if filters.category == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    <span>Education</span>
+    <select name="education">
+      <option value="">Any level</option>
+      {% for value, label in education_choices %}
+        <option value="{{ value }}" {% if filters.education == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button class="button" type="submit">Filter</button>
+  <a class="button secondary" href="{% url 'scheme_list' %}">Reset</a>
+</form>
+
+<section class="scheme-grid">
+  {% for scheme in schemes %}
+    <article class="scheme-card">
+      <p class="tag">{{ scheme.get_scope_display }}</p>
+      <h2><a href="{% url 'scheme_detail' scheme.slug %}">{{ scheme.name }}</a></h2>
+      <p>{{ scheme.description }}</p>
+      <p><strong>Benefit:</strong> {{ scheme.benefit }}</p>
+    </article>
+  {% empty %}
+    <p>No schemes found.</p>
+  {% endfor %}
+</section>
+{% endblock %}

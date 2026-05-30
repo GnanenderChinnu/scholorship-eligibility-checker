@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Eligibility Results{% endblock %}
+{% block content %}
+<section class="page-header print-header">
+  <div>
+    <h1>Eligibility results</h1>
+    <p>{{ profile.full_name }} · {{ profile.get_domicile_state_display }} · {{ profile.get_education_level_display }} · Income Rs. {{ profile.annual_family_income }}</p>
+  </div>
+  <button class="button secondary no-print" onclick="window.print()">Print / download</button>
+</section>
+
+<section class="report-summary">
+  <div><strong>{{ profile.get_category_display }}</strong><span>Category</span></div>
+  <div><strong>{{ profile.marks_percent }}%</strong><span>Marks</span></div>
+  <div><strong>{{ profile.age }}</strong><span>Age</span></div>
+  <div><strong>{{ profile.get_course_stream_display }}</strong><span>Course stream</span></div>
+</section>
+
+<section class="results-list">
+  {% for item in scheme_results %}
+    <article class="scheme-card {% if item.eligible %}eligible{% endif %}">
+      <div class="card-head">
+        <div>
+          <p class="tag">{{ item.scheme.get_scope_display }}</p>
+          <h2><a href="{% url 'scheme_detail' item.scheme.slug %}">{{ item.scheme.name }}</a></h2>
+          <p>{{ item.scheme.provider }}</p>
+        </div>
+        <strong class="score">{{ item.score }}%</strong>
+      </div>
+      <p>{{ item.scheme.benefit }}</p>
+      <p class="status {% if item.eligible %}good{% elif item.score >= 75 %}almost{% else %}warn{% endif %}">{{ item.status }}</p>
+      <div class="criteria-grid">
+        <div>
+          <h3>Matched</h3>
+          <ul>
+            {% for reason in item.matched %}<li>{{ reason }}</li>{% endfor %}
+          </ul>
+        </div>
+        <div>
+          <h3>Missing</h3>
+          <ul>
+            {% for reason in item.missing %}<li>{{ reason }}</li>{% empty %}<li>No missing requirement.</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% if item.scheme.official_url %}
+        <a class="button secondary no-print" href="{{ item.scheme.official_url }}" target="_blank" rel="noreferrer">Apply / verify officially</a>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>
+{% endblock %}
