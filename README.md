@@ -2,6 +2,14 @@
 
 A Django + SQLite scholarship eligibility checker for Indian central and state government schemes.
 
+## Live Demo
+
+Open the portfolio-ready static website here:
+
+[https://gnanenderchinnu.github.io/scholorship-eligibility-checker/](https://gnanenderchinnu.github.io/scholorship-eligibility-checker/)
+
+The live demo runs fully in the browser and does not need a backend server.
+
 ## Features
 
 - Student registration and login with Django auth
@@ -52,7 +60,11 @@ SQLite works for a demo deployment, but production scholarship data should be ba
 
 ## Static Portfolio Demo
 
-If you want a recruiter-friendly version that does not need Python, Django, or a server, open:
+The GitHub Pages version is served from the `docs` folder:
+
+[https://gnanenderchinnu.github.io/scholorship-eligibility-checker/](https://gnanenderchinnu.github.io/scholorship-eligibility-checker/)
+
+For local no-server testing, open:
 
 ```text
 static-demo/index.html
